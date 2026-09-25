@@ -1,0 +1,41 @@
+{
+  "name": "targetwise",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev --hostname 0.0.0.0",
+    "build": "next build",
+    "start": "next start --hostname 0.0.0.0",
+    "typecheck": "tsc --noEmit",
+    "test": "playwright test",
+    "admin:password": "node scripts/hash-password.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@fontsource-variable/dm-sans": "^5.3.0",
+    "@fontsource-variable/manrope": "^5.3.0",
+    "@fontsource-variable/noto-sans-arabic": "^5.3.0",
+    "jose": "^6.2.12",
+    "lucide-react": "^1.48.0",
+    "mongodb": "^7.6.0",
+    "next": "^16.3.6",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "@sparticuz/chromium": "^153.0.0",
+    "@types/node": "^26.6.2",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "mongodb-memory-server": "^11.3.0",
+    "prettier": "^3.9.9",
+    "typescript": "^7.0.2"
+  },
+  "private": true
+}

@@ -1,0 +1,88 @@
+import { blankItem, Content } from "./schema";
+const services = [
+  [
+    "paid-advertising",
+    "Paid advertising",
+    "الإعلانات المدفوعة",
+    "Reach people with a reason to choose you.",
+    "وصّل رسالتك للناس المناسبين.",
+    "Audience research, campaign strategy, creative direction and Meta Ads management. We connect the message, the offer and the audience, then refine using campaign data.",
+    "دراسة الجمهور، استراتيجية الحملات، توجيه المحتوى وإدارة إعلانات ميتا. منربط الرسالة والعرض بالجمهور ومنحسّن بناءً على بيانات الحملات.",
+  ],
+  [
+    "content-creation",
+    "Content creation",
+    "صناعة المحتوى",
+    "Turn your message into content people care about.",
+    "حوّل رسالتك لمحتوى بيهم جمهورك.",
+    "Content planning, scripting and video creation built around your business, your audience and your objectives.",
+    "تخطيط محتوى وكتابة سكريبتات وصناعة فيديوهات مبنية على مشروعك وجمهورك وأهدافك.",
+  ],
+  [
+    "ai-video",
+    "AI video production",
+    "فيديوهات بالذكاء الاصطناعي",
+    "Bring ambitious creative ideas to the screen.",
+    "حوّل الأفكار الإبداعية لفيديوهات.",
+    "Concept development and AI-assisted marketing videos, with creative direction and editing to fit your brand.",
+    "تطوير أفكار وفيديوهات تسويقية بمساعدة الذكاء الاصطناعي، مع توجيه إبداعي ومونتاج مناسب لهويتك.",
+  ],
+  [
+    "branding-design",
+    "Branding & design",
+    "الهوية والتصميم",
+    "Make every first impression feel intentional.",
+    "خلّي أول انطباع يعبّر عنك.",
+    "Visual identities, graphic design and campaign assets that give your business a consistent, recognizable presence.",
+    "هويات بصرية وتصميم غرافيك ومواد للحملات لتعطي مشروعك حضور واضح ومتناسق.",
+  ],
+  [
+    "social-management",
+    "Social media management",
+    "إدارة السوشال ميديا",
+    "Build a presence with a clear purpose.",
+    "ابنِ حضور إله هدف واضح.",
+    "Content calendars, publishing and ongoing social media management aligned with your marketing plan.",
+    "روزنامة محتوى ونشر وإدارة مستمرة للسوشال ميديا بما يناسب خطتك التسويقية.",
+  ],
+  [
+    "websites",
+    "Web design & development",
+    "تصميم وتطوير المواقع",
+    "Give your business a better place to grow.",
+    "اعطِ مشروعك مساحة أفضل للنمو.",
+    "Responsive websites that explain your offer, showcase your work and make it easy for customers to take the next step.",
+    "مواقع متجاوبة بتشرح خدماتك وبتعرض أعمالك وبتسهّل على العملاء ياخدوا الخطوة الجاية.",
+  ],
+];
+export const defaults: Content = {
+  settings: {
+    whatsapp: "96170173853",
+    instagram: "",
+    heroTitle: {
+      en: "The right audience.\nA stronger business.",
+      ar: "الجمهور الصح.\nبزنس أقوى.",
+    },
+    heroDescription: {
+      en: "Strategy, creative and digital experiences that bring your business closer to the people who matter.",
+      ar: "استراتيجية، إبداع وتجارب رقمية بتقرّب مشروعك من الناس المناسبين.",
+    },
+    about: {
+      en: "Good marketing starts before the campaign goes live. We get to know your business, understand your audience and shape a message worth paying attention to. Then we bring strategy, creative and technology together to put that message to work.",
+      ar: "التسويق الصح بيبلّش قبل إطلاق الإعلان. منتعرّف على مشروعك، منفهم جمهورك ومنصيغ رسالة بتستاهل الانتباه. بعدها منجمع الاستراتيجية والإبداع والتكنولوجيا لنحوّل الخطة لشغل فعلي.",
+    },
+  },
+  services: services.map((s, i) => ({
+    ...blankItem,
+    id: s[0],
+    title: { en: s[1], ar: s[2] },
+    description: { en: s[3], ar: s[4] },
+    details: { en: s[5], ar: s[6] },
+    published: true,
+    order: i,
+  })),
+  packages: [],
+  work: [],
+  testimonials: [],
+  metrics: [],
+};
