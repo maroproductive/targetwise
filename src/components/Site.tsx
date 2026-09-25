@@ -150,10 +150,7 @@ export default function Site({
             <Globe size={16} />
             {ar ? "EN" : "عربي"}
           </Link>
-          <button className="header-cta" onClick={() => enquire()}>
-            {t("Let’s talk", "نحكي؟")}
-            <ArrowUpRight size={16} />
-          </button>
+
           <button
             className="menu"
             aria-label={t("Toggle menu", "فتح القائمة")}
@@ -196,10 +193,11 @@ export default function Site({
                 <h1>{data.settings.heroTitle[lang]}</h1>
                 <p className="intro">{data.settings.heroDescription[lang]}</p>
               </div>
+              <div className="mobile-hero-art" aria-hidden="true" />
               <aside className="hero-note">
                 <span className="eyebrow">{t("BUILT AROUND YOU", "مبني على احتياجاتك")}</span>
                 <p>{t("Your audience. Your ambition. A clear plan to connect them.", "جمهورك وطموحك، وخطة واضحة لتوصّل بيناتن.")}</p>
-                <button onClick={()=>enquire()}>{t("Let’s talk", "خلّينا نحكي")}<ArrowUpRight size={15}/></button>
+
               </aside>
               <div className="hero-service-tiles">
                 <a className="hero-tile tile-accent" href="#about"><Target size={22}/><span>{t("MARKETING", "تسويق")}<br/>{t("WITH DIRECTION.", "باتجاه واضح.")}</span><ArrowUpRight size={20}/></a>

@@ -1252,34 +1252,45 @@ textarea {
  .hero-art-caption { left:32px; right:32px; }
  .site .nav a { padding-inline:12px; }
 }
-@media(max-width:800px) {
- .site .header { height:80px; }
- .site .nav { top:80px; background:#071416; border-radius:0; padding:20px; }
- .site .logo-link { width:180px; }
- .reference-hero { min-height:930px; }
- .reference-hero::before, [dir=rtl] .reference-hero::before { background-image:linear-gradient(0deg,#071416 5%,#07141690 40%,#071416b0 65%,#071416 94%),url('/hero-background.jpg'); background-size:cover,850px auto; background-position:center,center 180px; }
- .reference-hero .world { display:none; }
- .hero-statement { margin-top:35px; max-width:470px; }
- .hero-statement h1 { font-size:2.8rem; }
- .hero-statement .intro { max-width:420px; font-size:.85rem; }
- .hero-note { display:none; }
- .hero-agency, [dir=rtl] .hero-agency { bottom:260px; left:auto; right:32px; text-align:right; }
- .hero-agency>span { font-size:5.8rem; }
- .hero-service-tiles, [dir=rtl] .hero-service-tiles { bottom:60px; left:32px; right:32px; }
- .hero-tile { flex:1; min-width:0; width:auto; min-height:155px; }
- [dir=rtl] .hero-agency>span { font-size:3.8rem; line-height:1.1; }
+/* The desktop composition stays layered; phones use normal document flow. */
+.mobile-hero-art { display: none; }
+@media (max-width: 800px) {
+  .site .header { height: 80px; }
+  .site .nav { top: 80px; background: #071416; border-radius: 0; padding: 20px; }
+  .site .logo-link { width: clamp(140px, 38vw, 180px); }
+  .reference-hero {
+    display: flex; flex-direction: column; gap: 24px;
+    min-height: 0; padding: 24px 22px 32px; overflow: visible;
+  }
+  .reference-hero::before, [dir=rtl] .reference-hero::before { display: none; }
+  .reference-hero .world, .hero-note { display: none; }
+  .reference-hero .hero-top { margin: 0; }
+  .hero-statement { margin: 0; max-width: 100%; }
+  .hero-statement h1 { font-size: clamp(2rem, 8vw, 3.2rem); overflow-wrap: anywhere; }
+  .hero-statement .intro { max-width: 38rem; font-size: 1rem; margin-top: 18px; }
+  .mobile-hero-art {
+    display: block; width: 100%; aspect-ratio: 4 / 3; max-height: 440px;
+    background: #071416 url('/hero-background.jpg') center / contain no-repeat;
+    border-radius: 18px;
+  }
+  .hero-agency, [dir=rtl] .hero-agency {
+    position: static; text-align: start; order: 2;
+  }
+  .hero-agency > span, [dir=rtl] .hero-agency > span { display: none; }
+  .hero-agency .button { margin: 0; width: 100%; justify-content: center; white-space: normal; }
+  .hero-art-caption { position: static; margin: -12px 0 0; font-size: .7rem; order: 1; }
+  .hero-service-tiles, [dir=rtl] .hero-service-tiles {
+    position: static; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px; order: 3;
+  }
+  .hero-tile { width: auto; min-width: 0; min-height: 160px; padding: 18px; }
+  .hero-tile p, .hero-tile span { overflow-wrap: anywhere; }
+  .floating-wa { bottom: max(18px, env(safe-area-inset-bottom)); right: 18px; width: 54px; height: 54px; }
+  .site .work-empty { padding: 26px; }
 }
-@media(max-width:480px) {
- .site .logo-link { width:150px; }
- .reference-hero { padding-inline:22px; min-height:920px; }
- .hero-statement h1 { font-size:2.65rem; }
- .hero-statement .intro { font-size:.85rem; max-width:300px; }
- .hero-agency, [dir=rtl] .hero-agency { right:22px; bottom:265px; }
- .hero-agency>span { font-size:5.2rem; }
- .hero-service-tiles, [dir=rtl] .hero-service-tiles { left:22px; right:22px; bottom:65px; gap:10px; }
- .hero-tile { padding:16px; }
- .hero-art-caption { left:22px; right:22px; font-size:.65rem; }
- .site .work-empty { padding:26px; }
+@media (max-width: 360px) {
+  .reference-hero { padding-inline: 16px; }
+  .hero-service-tiles, [dir=rtl] .hero-service-tiles { grid-template-columns: 1fr; }
 }
 
 .media-picker { margin-block: 1.5rem; }
