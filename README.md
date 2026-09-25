@@ -179,3 +179,12 @@ Implementation references: [Next.js cookies](https://nextjs.org/docs/app/api-ref
  #   t a r g e t w i s e  
  #   t a r g e t w i s e  
  
+## Admin photo and video uploads
+
+Create a **public Vercel Blob** store in the TargetWise project's Storage tab and connect it to Production (and Development for local testing). Ensure `BLOB_READ_WRITE_TOKEN` is available to that environment, then redeploy. Never commit the token. MongoDB continues storing content and media URLs; file bytes go directly to Blob, avoiding the server request-size limit.
+
+Admins can choose photos (JPG, PNG, WebP, GIF, AVIF; 10 MB maximum) and videos (MP4, WebM, MOV; 100 MB maximum) from their device. Export HEIC photos to JPG first; MP4 is recommended for playback compatibility. Uploads show progress and previews. Save the item after upload or removal. Existing URLs remain usable. New identifiers are generated from the English title plus a UUID; editing preserves existing identifiers and service links.
+
+Uploaded media is public by URL, even before publishing an item. Removing/replacing media or canceling an edit does not delete Blob files, to avoid deleting shared assets. Remove unused files from the Blob dashboard when no content references them. Blob storage and bandwidth count toward your Vercel usage.
+
+Verification after deployment: sign in, choose a photo and a video on mobile/desktop, save and refresh, confirm public playback, replace/remove and save, then confirm an unsigned upload request is rejected. Actual Blob transfers require a connected store; local completion webhooks require a reachable callback URL, but content saving uses the upload response and does not depend on the webhook.

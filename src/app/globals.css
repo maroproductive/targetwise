@@ -1281,3 +1281,8 @@ textarea {
  .hero-art-caption { left:22px; right:22px; font-size:.65rem; }
  .site .work-empty { padding:26px; }
 }
+
+.media-picker { margin-block: 1.5rem; }
+.media-picker input[type="file"] { max-width: 100%; padding: 1rem; }
+.media-preview img, .media-preview video { display: block; width: 100%; max-width: 440px; max-height: 300px; object-fit: contain; border-radius: 12px; margin-block: 1rem; background: #102d33; }
+.media-picker progress { max-width: 100%; accent-color: #174b55; }

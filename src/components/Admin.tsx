@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import MediaPicker from "./MediaPicker";
 import { useRouter } from "next/navigation";
 import {
   Plus,
@@ -34,6 +35,7 @@ export default function Admin({
   );
   const [notice, setNotice] = useState(problem || "");
   const [busy, setBusy] = useState(false);
+  const [uploading, setUploading] = useState(false);
   async function request(url: string, method: string, body?: unknown) {
     setBusy(true);
     setNotice("");
@@ -76,11 +78,28 @@ export default function Admin({
   }
   async function save(e: React.FormEvent) {
     e.preventDefault();
+    if (uploading) return;
+    const payload =
+      item && !editing
+        ? {
+            ...item,
+            id:
+              (item.title.en
+                .toLowerCase()
+                .normalize("NFKD")
+                .replace(/[\u0300-\u036f]/g, "")
+                .replace(/[^a-z0-9]+/g, "-")
+                .replace(/^-|-$/g, "")
+                .slice(0, 55) || "item") +
+              "-" +
+              item.id,
+          }
+        : item;
     if (
       await request(
         "/api/admin/" + tab,
         "PUT",
-        tab === "settings" ? settings : item,
+        tab === "settings" ? settings : payload,
       )
     ) {
       setNotice("Saved successfully.");
@@ -111,7 +130,7 @@ export default function Admin({
               required
             />
           </label>
-          <button className="button" disabled={busy}>
+          <button className="button" disabled={busy || uploading}>
             {busy ? "Signing in…" : "Sign in"}
             <ArrowUpRight size={18} />
           </button>
@@ -135,6 +154,7 @@ export default function Admin({
               key={k}
               aria-current={tab === k ? "page" : undefined}
               className={tab === k ? "active" : ""}
+              disabled={busy || uploading}
               onClick={() => {
                 setTab(k);
                 setItem(null);
@@ -151,7 +171,7 @@ export default function Admin({
         </a>
         <button
           className="text-link"
-          disabled={busy}
+          disabled={busy || uploading}
           onClick={async () => {
             if (await request("/api/auth", "DELETE")) router.refresh();
           }}
@@ -244,7 +264,7 @@ export default function Admin({
                 </div>
               </fieldset>
             ))}
-            <button className="button" disabled={busy}>
+            <button className="button" disabled={busy || uploading}>
               <Save size={18} />
               {busy ? "Saving…" : "Save settings"}
             </button>
@@ -255,6 +275,7 @@ export default function Admin({
               <h2>{editing ? "Edit item" : "New item"}</h2>
               <button
                 type="button"
+                disabled={busy || uploading}
                 aria-label="Cancel editing"
                 className="icon-button"
                 onClick={() => setItem(null)}
@@ -265,16 +286,6 @@ export default function Admin({
             <p className="hint">
               Add both languages. Only published items appear on the website.
             </p>
-            <label>
-              URL identifier (lowercase letters, numbers and hyphens)
-              <input
-                value={item.id}
-                disabled={editing}
-                required
-                pattern="[a-z0-9-]+"
-                onChange={(e) => change("id", e.target.value)}
-              />
-            </label>
             {(["title", "description", "details"] as const).map((k) => (
               <fieldset key={k}>
                 <legend>
@@ -350,29 +361,22 @@ export default function Admin({
               </div>
             )}
             {tab === "work" && (
-              <label>
-                Image URL
-                <input
-                  type="url"
-                  placeholder="https://…"
-                  value={item.image}
-                  onChange={(e) => change("image", e.target.value)}
-                />
-                <span className="hint">
-                  Use a permanent public image URL from your media hosting
-                  provider.
-                </span>
-              </label>
+              <MediaPicker
+                kind="image"
+                value={item.image}
+                disabled={busy || uploading}
+                onChange={(url) => change("image", url)}
+                onBusy={setUploading}
+              />
             )}
             {(tab === "work" || tab === "testimonials") && (
-              <label>
-                Video URL (optional)
-                <input
-                  type="url"
-                  value={item.video}
-                  onChange={(e) => change("video", e.target.value)}
-                />
-              </label>
+              <MediaPicker
+                kind="video"
+                value={item.video}
+                disabled={busy || uploading}
+                onChange={(url) => change("video", url)}
+                onBusy={setUploading}
+              />
             )}
             {(tab === "metrics" || tab === "work") && (
               <label>
@@ -412,7 +416,7 @@ export default function Admin({
                 permission to share.
               </p>
             )}
-            <button className="button" disabled={busy}>
+            <button className="button" disabled={busy || uploading}>
               <Save size={18} />
               {busy ? "Saving…" : "Save item"}
             </button>
@@ -452,7 +456,7 @@ export default function Admin({
                         Edit
                       </button>
                       <button
-                        disabled={busy}
+                        disabled={busy || uploading}
                         aria-label={"Delete " + i.title.en}
                         onClick={async () => {
                           if (

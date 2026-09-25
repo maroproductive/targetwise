@@ -66,7 +66,7 @@ test("desktop, mobile, Arabic, service details and WhatsApp message", async ({
     ).toBeVisible();
     await page.getByRole("button", { name: "Packages", exact: true }).click();
     await page.getByRole("button", { name: "Add new" }).click();
-    await page.getByLabel("URL identifier").fill("test-package");
+    await expect(page.getByLabel("URL identifier")).toHaveCount(0);
     await page
       .getByLabel("English", { exact: true })
       .nth(0)
@@ -123,6 +123,34 @@ test("desktop, mobile, Arabic, service details and WhatsApp message", async ({
     await expect(
       publicPage.getByRole("heading", { name: "Integration test package" }),
     ).toHaveCount(0);
+    await page
+      .getByRole("button", { name: "Work & results", exact: true })
+      .click();
+    await page.getByRole("button", { name: "Add new" }).click();
+    await expect(page.getByLabel("Photo", { exact: true })).toHaveAttribute(
+      "type",
+      "file",
+    );
+    await expect(page.getByLabel("Video (optional)")).toHaveAttribute(
+      "type",
+      "file",
+    );
+    await page
+      .getByLabel("Photo", { exact: true })
+      .setInputFiles({
+        name: "bad.svg",
+        mimeType: "image/svg+xml",
+        buffer: Buffer.from("<svg/>"),
+      });
+    await expect(page.getByRole("alert")).toContainText("Choose a JPG");
+    await page
+      .getByLabel("Video (optional)")
+      .setInputFiles({
+        name: "empty.mp4",
+        mimeType: "video/mp4",
+        buffer: Buffer.alloc(0),
+      });
+    await expect(page.getByText("Choose a non-empty file")).toBeVisible();
     await page.getByRole("button", { name: "Sign out", exact: true }).click();
     await expect(
       page.getByRole("heading", { name: "Welcome back." }),
@@ -143,6 +171,18 @@ test("protected writes, origin enforcement, manifest and offline fallback", asyn
     data: {},
   });
   expect(cross.status()).toBe(403);
+  const upload = await request.post("/api/media/upload", {
+    headers: { Origin: "http://localhost:3100" },
+    data: {
+      type: "blob.generate-client-token",
+      payload: {
+        pathname: "media/image/12345678-1234-1234-1234-123456789abc.jpg",
+        multipart: false,
+      },
+    },
+  });
+  expect(upload.ok()).toBe(false);
+  expect(await upload.text()).not.toContain("clientToken");
   const manifest = await request.get("/manifest.webmanifest");
   expect((await manifest.json()).icons).toHaveLength(3);
   await page.goto("/en");
