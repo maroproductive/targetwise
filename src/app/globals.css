@@ -562,18 +562,28 @@ summary {
 }
 .floating-wa {
   position: fixed;
-  bottom: 25px;
-  inset-inline-end: 24px;
-  border: 1px solid #cfddd1;
-  background: var(--ink);
-  color: var(--paper);
+  bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+  right: calc(24px + env(safe-area-inset-right, 0px));
+  border: 2px solid #fff;
+  background: #128c4b;
+  color: #fff;
   border-radius: 50%;
-  width: 52px;
-  height: 52px;
+  width: 58px;
+  height: 58px;
   display: grid;
   place-items: center;
-  box-shadow: 0 4px 20px #123c4622;
-  z-index: 25;
+  padding: 0;
+  box-shadow: 0 4px 18px #123c4638;
+  z-index: 40;
+  transition: background 0.2s, transform 0.2s;
+}
+.floating-wa:hover {
+  background: #0c703b;
+  transform: translateY(-2px);
+}
+.floating-wa:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 4px;
 }
 .enquiry {
   border: 0;
@@ -1141,8 +1151,8 @@ textarea {
     font-size: 2rem;
   }
   .floating-wa {
-    bottom: 18px;
-    inset-inline-end: 18px;
+    bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+    right: calc(18px + env(safe-area-inset-right, 0px));
   }
   .editor {
     padding: 20px;
@@ -1168,4 +1178,106 @@ textarea {
     transition: none !important;
     animation: none !important;
   }
+}
+
+
+/* Reference-inspired agency direction. Uncommitted local design. */
+.site { background: #071416; color: #f5f2ea; }
+.site .header { background: #071416f5; border-bottom-color: #ffffff1a; height: 88px; }
+.site .logo-link { background: var(--paper); padding: 9px 12px; width: 205px; border-radius: 7px; }
+.site .nav { border: 1px solid #ffffff26; border-radius: 50px; padding: 8px; gap: 4px; }
+.site .nav a { padding: 7px 17px; border-radius: 40px; }
+.site .nav a:first-child { background: #d4e0bd; color: #123c46; }
+.site .language, .site .menu { color: #f5f2ea; }
+.site .header-cta { background: #f5f2ea; color: #123c46; border-radius: 30px; }
+.site h2 { font-family: "Manrope Variable", "Noto Sans Arabic Variable", sans-serif; }
+.site h2 em { font: inherit; color: #c5d6a2; }
+.site p { color: #b6c6c3; }
+.reference-hero { position: relative; isolation: isolate; max-width: 1600px; min-height: 760px; overflow: hidden; padding: 30px 56px 25px; }
+.reference-hero::before { content:""; position:absolute; inset:0; z-index:-1; background-image:linear-gradient(90deg,#071416ed 0%,#07141690 25%,#07141608 53%,#07141680 100%),linear-gradient(0deg,#071416 0%,transparent 35%),url('/hero-background.jpg'); background-size:cover,cover,1120px auto; background-position:center,center,65% 40%; background-repeat:no-repeat; }
+.reference-hero .hero-top { position:relative; z-index:1; }
+.reference-hero .world { color:#c4d1cb; }
+.hero-statement { position:relative; max-width:355px; margin-top:68px; }
+.hero-statement h1 { font-size:clamp(2.4rem,3.3vw,3.3rem); letter-spacing:-.06em; font-weight:450; line-height:1.1; white-space:pre-line; }
+.hero-statement .intro { font-size:.9rem; margin-top:22px; max-width:280px; color:#d0dad5; }
+.hero-note { position:absolute; top:120px; right:56px; width:210px; padding:22px; border-radius:14px; background:#f5f2ea; color:#123c46; box-shadow:0 10px 40px #0005; }
+.hero-note p { color:#4e6262; font-size:.8rem; margin:14px 0 18px; line-height:1.5; }
+.hero-note .eyebrow { font-size:.65rem; letter-spacing:.08em; }
+.hero-note button { display:flex; align-items:center; gap:15px; border:0; border-radius:24px; background:#123c46; color:#fff; font-size:.75rem; padding:9px 14px; }
+.hero-service-tiles { display:flex; gap:12px; position:absolute; bottom:85px; left:56px; }
+.hero-tile { width:175px; min-height:155px; border-radius:14px; padding:20px; display:flex; flex-direction:column; justify-content:space-between; gap:12px; }
+.tile-accent { background:#c5d6a2; color:#123c46; font-size:.8rem; font-weight:650; line-height:1.2; }
+.tile-accent>svg:last-child { align-self:flex-end; }
+.tile-light { background:#f5f2ea; color:#123c46; width:205px; }
+.tile-light .eyebrow { font-size:.65rem; letter-spacing:.04em; }
+.tile-light p { color:#4e6262; font-size:.8rem; line-height:1.4; }
+.tile-link { display:flex; justify-content:space-between; align-items:center; font-size:.75rem; text-decoration:underline; text-underline-offset:3px; }
+.hero-agency { position:absolute; right:56px; bottom:85px; text-align:right; }
+.hero-agency>span { display:block; font-family:"Manrope Variable","Noto Sans Arabic Variable",sans-serif; font-size:clamp(4.5rem,8vw,7.5rem); font-weight:800; line-height:.86; letter-spacing:-.075em; }
+.hero-agency .button { margin-top:24px; border:0; border-radius:40px; background:#c5d6a2; color:#123c46; padding:14px 25px; }
+.hero-art-caption { position:absolute; bottom:20px; left:56px; right:56px; font-size:.7rem; color:#a6b6b1; }
+.site .services-section { margin-top:0; background:#071416; border-top:1px solid #ffffff20; padding-block:85px; }
+.site .services-grid { border:0; gap:15px; }
+.site .service-card { border:1px solid #ffffff26; border-radius:14px; background:#10282c; }
+.site .service-card:hover { background:#173b42; }
+.site .section-heading>p { color:#b6c6c3; }
+.site .work-empty { border-color:#ffffff25; padding:38px; border-radius:16px; background:#0f2428; }
+.site .work-empty .button { background:#c5d6a2; color:#123c46; border:0; border-radius:30px; }
+.site .packages-section { background:#f5f2ea; color:#123c46; }
+.site .packages-section p { color:#587077; }
+.site .packages-section h2 em { color:#587448; }
+.site .package { background:#fffdf7; border-radius:16px; }
+.site .process>div { border-color:#ffffff26; }
+.site .contact { background:#123c46; border-top:1px solid #ffffff1c; }
+.site .contact .button { border-radius:40px; }
+.site .footer { border-top:1px solid #ffffff20; }
+.site .footer>a { background:var(--paper); padding:6px 12px; border-radius:7px; line-height:0; }
+.site .testimonials figure { background:#163237; border-radius:14px; }
+.site .metrics, .site .work-card details, .site .service-details { border-color:#ffffff26; }
+.site .enquiry p { color:#587077; }
+.site .enquiry .text-link { color:#123c46; }
+.site .service-hero>.button { background:#c5d6a2; color:#123c46; border:0; border-radius:30px; }
+[dir=rtl] .hero-statement { margin-inline-start:0; margin-inline-end:auto; }
+[dir=rtl] .hero-note { right:auto; left:56px; }
+[dir=rtl] .hero-service-tiles { left:auto; right:56px; }
+[dir=rtl] .hero-agency { right:auto; left:56px; text-align:left; }
+[dir=rtl] .hero-agency>span { letter-spacing:0; line-height:1.15; font-size:5rem; }
+[dir=rtl] .reference-hero::before { background-image:linear-gradient(270deg,#071416ed 0%,#07141690 25%,#07141608 53%,#07141680 100%),linear-gradient(0deg,#071416 0%,transparent 35%),url('/hero-background.jpg'); }
+@media(max-width:1100px) {
+ .reference-hero { padding-inline:32px; }
+ .hero-statement { max-width:290px; }
+ .hero-note { right:32px; width:180px; }
+ .hero-service-tiles { left:32px; }
+ .hero-agency { right:32px; }
+ .hero-art-caption { left:32px; right:32px; }
+ .site .nav a { padding-inline:12px; }
+}
+@media(max-width:800px) {
+ .site .header { height:80px; }
+ .site .nav { top:80px; background:#071416; border-radius:0; padding:20px; }
+ .site .logo-link { width:180px; }
+ .reference-hero { min-height:930px; }
+ .reference-hero::before, [dir=rtl] .reference-hero::before { background-image:linear-gradient(0deg,#071416 5%,#07141690 40%,#071416b0 65%,#071416 94%),url('/hero-background.jpg'); background-size:cover,850px auto; background-position:center,center 180px; }
+ .reference-hero .world { display:none; }
+ .hero-statement { margin-top:35px; max-width:470px; }
+ .hero-statement h1 { font-size:2.8rem; }
+ .hero-statement .intro { max-width:420px; font-size:.85rem; }
+ .hero-note { display:none; }
+ .hero-agency, [dir=rtl] .hero-agency { bottom:260px; left:auto; right:32px; text-align:right; }
+ .hero-agency>span { font-size:5.8rem; }
+ .hero-service-tiles, [dir=rtl] .hero-service-tiles { bottom:60px; left:32px; right:32px; }
+ .hero-tile { flex:1; min-width:0; width:auto; min-height:155px; }
+ [dir=rtl] .hero-agency>span { font-size:3.8rem; line-height:1.1; }
+}
+@media(max-width:480px) {
+ .site .logo-link { width:150px; }
+ .reference-hero { padding-inline:22px; min-height:920px; }
+ .hero-statement h1 { font-size:2.65rem; }
+ .hero-statement .intro { font-size:.85rem; max-width:300px; }
+ .hero-agency, [dir=rtl] .hero-agency { right:22px; bottom:265px; }
+ .hero-agency>span { font-size:5.2rem; }
+ .hero-service-tiles, [dir=rtl] .hero-service-tiles { left:22px; right:22px; bottom:65px; gap:10px; }
+ .hero-tile { padding:16px; }
+ .hero-art-caption { left:22px; right:22px; font-size:.65rem; }
+ .site .work-empty { padding:26px; }
 }
