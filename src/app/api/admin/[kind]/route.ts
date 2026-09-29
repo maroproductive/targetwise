@@ -64,15 +64,9 @@ async function mutate(
             { error: "Add a title in both languages." },
             { status: 400 },
           );
-        if (
-          kind === "packages" &&
-          (!data.serviceId ||
-            !(await d.collection("services").findOne({ id: data.serviceId })))
-        )
-          return NextResponse.json(
-            { error: "Choose an existing service." },
-            { status: 400 },
-          );
+        // Growth plans can combine multiple services, so packages are not
+        // required to belong to one service. Existing serviceId values remain
+        // supported for backwards compatibility.
         await d
           .collection(kind)
           .updateOne({ id: data.id }, { $set: data }, { upsert: true });
