@@ -14,7 +14,7 @@ import {
 import { blankItem, kinds, Content, Item, Kind, Settings } from "@/lib/schema";
 const labels: Record<Kind, string> = {
   services: "Services",
-  packages: "Packages",
+  packages: "Growth plans",
   work: "Work & results",
   testimonials: "Testimonials",
   metrics: "Key figures",
@@ -290,12 +290,18 @@ export default function Admin({
               <fieldset key={k}>
                 <legend>
                   {k === "title"
-                    ? "Title / client name"
+                    ? tab === "packages"
+                      ? "Plan name"
+                      : "Title / client name"
                     : k === "description"
                       ? tab === "testimonials"
                         ? "Exact client quote"
-                        : "Short description"
-                      : "Details / scope / result context"}
+                        : tab === "packages"
+                          ? "Short promise / who it is for"
+                          : "Short description"
+                      : tab === "packages"
+                        ? "What's included (one item per line works best)"
+                        : "Details / scope / result context"}
                 </legend>
                 <div className="field-grid">
                   {(["en", "ar"] as const).map((l) => (
@@ -321,12 +327,11 @@ export default function Admin({
                 </div>
               </fieldset>
             ))}
-            {(tab === "packages" || tab === "work") && (
+            {tab === "work" && (
               <label>
                 Related service
                 <select
                   value={item.serviceId}
-                  required={tab === "packages"}
                   onChange={(e) => change("serviceId", e.target.value)}
                 >
                   <option value="">Select service</option>
@@ -337,6 +342,11 @@ export default function Admin({
                   ))}
                 </select>
               </label>
+            )}
+            {tab === "packages" && (
+              <p className="hint">
+                Growth plans can include multiple services, so they are not tied to one service. Use the details fields for the included services.
+              </p>
             )}
             {(tab === "packages" || tab === "services") && (
               <div className="field-grid">
