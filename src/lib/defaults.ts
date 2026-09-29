@@ -81,7 +81,53 @@ export const defaults: Content = {
     published: true,
     order: i,
   })),
-  packages: [],
+  packages: [
+    {
+      ...blankItem,
+      id: "foundation",
+      title: { en: "Foundation", ar: "Foundation" },
+      description: {
+        en: "Build the right presence. For businesses that need a stronger, more professional online foundation.",
+        ar: "ابنِ الحضور الصح. للمشاريع اللي بحاجة لوجود أونلاين أقوى وأكثر احترافية.",
+      },
+      details: {
+        en: "Marketing & content strategy\nSocial media management\nContent creation\nGraphic design\nReels when needed\nPremium AI content when relevant\nContent calendar\nMonthly reporting",
+        ar: "استراتيجية التسويق والمحتوى\nإدارة السوشال ميديا\nصناعة المحتوى\nالتصميم الغرافيكي\nReels عند الحاجة\nمحتوى AI Premium عند الحاجة\nContent Calendar\nتقرير شهري",
+      },
+      published: true,
+      order: 0,
+    },
+    {
+      ...blankItem,
+      id: "growth",
+      title: { en: "Growth", ar: "Growth" },
+      description: {
+        en: "Turn attention into leads. For businesses with a solid foundation that are ready to actively grow.",
+        ar: "حوّل الانتباه إلى Leads. للمشاريع اللي عندها أساس قوي وصارت جاهزة تنمو بشكل فعلي.",
+      },
+      details: {
+        en: "Meta Ads campaigns\nLead generation\nRetargeting\nCreative testing\nAudience testing\nCampaign optimization\nFunnels\nLanding pages\nPerformance tracking",
+        ar: "حملات Meta Ads\nLead Generation\nRetargeting\nCreative Testing\nAudience Testing\nتحسين الحملات\nFunnels\nLanding Pages\nمتابعة الأداء",
+      },
+      published: true,
+      order: 1,
+    },
+    {
+      ...blankItem,
+      id: "scale",
+      title: { en: "Scale", ar: "Scale" },
+      description: {
+        en: "Your marketing team, without building one in-house. For businesses that need a bigger growth partner.",
+        ar: "فريق التسويق تبعك بدون ما تبنيه داخلياً. للمشاريع اللي بحاجة لشريك نمو متكامل.",
+      },
+      details: {
+        en: "Full marketing strategy\nContent production\nSocial media management\nMultiple ad campaigns\nLead generation\nRetargeting\nFunnels\nWebsites\nBranding\nAI production\nAnalytics\nGrowth planning",
+        ar: "استراتيجية تسويق كاملة\nإنتاج المحتوى\nإدارة السوشال ميديا\nعدة حملات إعلانية\nLead Generation\nRetargeting\nFunnels\nWebsites\nBranding\nAI Production\nAnalytics\nGrowth Planning",
+      },
+      published: true,
+      order: 2,
+    },
+  ],
   work: [],
   testimonials: [],
   metrics: [],
