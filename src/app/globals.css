@@ -1346,3 +1346,23 @@ textarea {
     gap: 20px;
   }
 }
+
+
+/* Enquiry selection */
+.selected-interest {
+  margin: 14px 0 18px;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+.selected-interest .eyebrow {
+  display: block;
+  margin-bottom: 6px;
+}
+.selected-interest strong {
+  display: block;
+  font-size: 1rem;
+}
+.selected-plan {
+  background: rgba(18, 60, 70, 0.05);
+}
