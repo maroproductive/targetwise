@@ -30,6 +30,7 @@ export default function Site({
   const t = (en: string, arabic: string) => (ar ? arabic : en);
   const [menu, setMenu] = useState(false);
   const [interest, setInterest] = useState("");
+  const [interestType, setInterestType] = useState<"general" | "plan">("general");
   const dialog = useRef<HTMLDialogElement>(null);
   const [ready, setReady] = useState(false);
   const [wa, setWa] = useState("");
@@ -46,8 +47,9 @@ export default function Site({
     if ("serviceWorker" in navigator)
       navigator.serviceWorker.register("/sw.js").catch(() => {});
   }, [lang, ar]);
-  function enquire(name = "") {
+  function enquire(name = "", type: "general" | "plan" = "general") {
     setInterest(name);
+    setInterestType(type);
     setReady(false);
     dialog.current?.showModal();
   }
@@ -60,7 +62,9 @@ export default function Site({
         "مرحبًا TargetWise، حابب ناقش مشروعي معكن.",
       ) +
       "\n" +
-      t("Interested in: ", "مهتم بـ: ") +
+      (interestType === "plan"
+        ? t("Selected growth plan: ", "خطة النمو المختارة: ")
+        : t("Interested in: ", "مهتم بـ: ")) +
       (interest || t("Marketing consultation", "استشارة تسويقية")) +
       "\n" +
       t("Business: ", "المشروع: ") +
@@ -79,8 +83,16 @@ export default function Site({
     );
     setReady(true);
   }
-  const CTA = ({ name = "", label }: { name?: string; label?: string }) => (
-    <button className="button" onClick={() => enquire(name)}>
+  const CTA = ({
+    name = "",
+    label,
+    type = "general",
+  }: {
+    name?: string;
+    label?: string;
+    type?: "general" | "plan";
+  }) => (
+    <button className="button" onClick={() => enquire(name, type)}>
       {label || t("Let’s talk about your business", "خلّينا نحكي عن مشروعك")}
       <ArrowUpRight size={19} />
     </button>
@@ -109,6 +121,7 @@ export default function Site({
       )}
       <CTA
         name={p.title[lang]}
+        type="plan"
         label={t("Discuss this plan", "ناقش هالخطة")}
       />
     </article>
@@ -531,13 +544,23 @@ export default function Site({
           {t("LET’S START WITH YOU", "خلّينا نبلّش بمشروعك")}
         </p>
         <h2>{t("Tell us a little.", "خبرنا شوي.")}</h2>
-        <p>
-          {interest ||
-            t(
+        {interest ? (
+          <div className={interestType === "plan" ? "selected-interest selected-plan" : "selected-interest"}>
+            <span className="eyebrow">
+              {interestType === "plan"
+                ? t("SELECTED GROWTH PLAN", "خطة النمو المختارة")
+                : t("YOUR INTEREST", "اهتمامك")}
+            </span>
+            <strong>{interest}</strong>
+          </div>
+        ) : (
+          <p>
+            {t(
               "Your next step starts with a conversation.",
               "خطوتك الجاية بتبلّش بمحادثة.",
             )}
-        </p>
+          </p>
+        )}
         {ready ? (
           <div className="ready">
             <p>
