@@ -37,7 +37,7 @@ export async function initialize(kind: string) {
   const d = await db();
   await d.collection(kind).createIndex({ id: 1 }, { unique: true });
   if (kind === "services" || kind === "packages") {
-    for (const item of defaults[kind])
+    for (const item of kind === "services" ? defaults.services : defaults.packages)
       await d
         .collection(kind)
         .updateOne({ id: item.id }, { $setOnInsert: item }, { upsert: true });
