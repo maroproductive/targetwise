@@ -57,7 +57,7 @@ export default function Site({
     const msg =
       t(
         "Hello TargetWise, I’d like to discuss my business.",
-        "مرحباً TargetWise، حابب ناقش مشروعي معكن.",
+        "مرحبًا TargetWise، حابب ناقش مشروعي معكن.",
       ) +
       "\n" +
       t("Interested in: ", "مهتم بـ: ") +
@@ -101,7 +101,7 @@ export default function Site({
       {p.details[lang] && (
         <details className="plan-details">
           <summary>
-            {t("See what's included", "شوف شو بيتضمن")}
+            {t("See what's included", "شوف شو بتتضمّن الخطة")}
             <Plus size={16} />
           </summary>
           <div className="detail-text">{p.details[lang]}</div>
@@ -194,7 +194,7 @@ export default function Site({
           <>
             <section className="hero wrap reference-hero">
               <div className="hero-top">
-                <p className="eyebrow">{t("STRATEGY. CREATIVE. DIGITAL.", "استراتيجية. إبداع. رقمي.")}</p>
+                <p className="eyebrow">{t("STRATEGY. CREATIVE. DIGITAL.", "استراتيجية. إبداع. حضور رقمي.")}</p>
                 <span className="world">{t("From Lebanon. For the world.", "من لبنان، لكل العالم.")}<Globe size={16}/></span>
               </div>
               <div className="hero-statement">
@@ -204,12 +204,12 @@ export default function Site({
               <div className="mobile-hero-art" aria-hidden="true" />
               <aside className="hero-note">
                 <span className="eyebrow">{t("BUILT AROUND YOU", "مبني على احتياجاتك")}</span>
-                <p>{t("Your audience. Your ambition. A clear plan to connect them.", "جمهورك وطموحك، وخطة واضحة لتوصّل بيناتن.")}</p>
+                <p>{t("Your audience. Your ambition. A clear plan to connect them.", "جمهورك وطموحك، وخطة واضحة بتوصل بيناتن.")}</p>
 
               </aside>
               <div className="hero-service-tiles">
                 <a className="hero-tile tile-accent" href="#about"><Target size={22}/><span>{t("MARKETING", "تسويق")}<br/>{t("WITH DIRECTION.", "باتجاه واضح.")}</span><ArrowUpRight size={20}/></a>
-                <a className="hero-tile tile-light" href="#services"><span className="eyebrow">{t("THE WHOLE PICTURE", "الصورة كاملة")}</span><p>{t("From the first idea to your next customer.", "من أول فكرة للعميل الجاي.")}</p><span className="tile-link">{t("Explore services", "اكتشف الخدمات")}<ArrowUpRight size={20}/></span></a>
+                <a className="hero-tile tile-light" href="#services"><span className="eyebrow">{t("THE WHOLE PICTURE", "الصورة كاملة")}</span><p>{t("From the first idea to your next customer.", "من أول فكرة لحدّ العميل الجاي.")}</p><span className="tile-link">{t("Explore services", "اكتشف الخدمات")}<ArrowUpRight size={20}/></span></a>
               </div>
               <div className="hero-agency"><span>{t("digital", "وكالة")}</span><span>{t("agency", "رقمية")}</span><CTA label={t("Start a conversation", "بلّش بمحادثة")}/></div>
               <p className="hero-art-caption">{t("Concept artwork — figures shown are illustrative.", "تصميم توضيحي — الأرقام الظاهرة للتوضيح فقط.")}</p>
@@ -235,7 +235,7 @@ export default function Site({
                   <p>
                     {t(
                       "From the first idea to the next customer. Choose the support your business needs, with a team that sees the whole picture.",
-                      "من أول فكرة للعميل الجاي. اختار الدعم اللي مشروعك بحاجة إله، مع فريق بيشوف الصورة كاملة.",
+                      "من أول فكرة لحدّ العميل الجاي. اختار الدعم اللي مشروعك بحاجة إله، مع فريق بيشوف الصورة كاملة.",
                     )}
                   </p>
                 </div>
@@ -281,7 +281,7 @@ export default function Site({
             <p>
               {t(
                 "A closer look at the ideas, execution and outcomes behind our work.",
-                "نظرة أقرب للأفكار والتنفيذ والنتائج ورا شغلنا.",
+                "نظرة أقرب على الأفكار والتنفيذ والنتائج اللي ورا شغلنا.",
               )}
             </p>
           </div>
@@ -327,7 +327,7 @@ export default function Site({
               <p>
                 {t(
                   "Tell us what you’re working on. Ask us for examples relevant to your goals.",
-                  "خبرنا عن مشروعك واطلب تشوف أمثلة بتناسب أهدافك.",
+                  "خبرنا عن مشروعك، واطلب تشوف أمثلة بتناسب أهدافك.",
                 )}
               </p>
               <CTA
@@ -371,15 +371,15 @@ export default function Site({
                   03 — {t("WORK WITH US", "اشتغل معنا")}
                 </p>
                 <h2>
-                  {t("Built for where", "مبني حسب المرحلة")}
+                  {t("Built for where", "مبني للمرحلة")}
                   <br />
-                  <em>{t("your business is going.", "اللي مشروعك رايح عليها.")}</em>
+                  <em>{t("your business is going.", "الجاية من مشروعك.")}</em>
                 </h2>
               </div>
               <p>
                 {t(
                   "Every business is at a different stage. We assess what you actually need, then build the right plan around your goal.",
-                  "كل مشروع بمرحلة مختلفة. منفهم شو فعلياً بحاجة، وبعدها منبني الخطة المناسبة حول هدفك.",
+                  "كل مشروع بمرحلة مختلفة. منقيّم شو مشروعك بحاجة إله فعليًا، وبعدها منبني الخطة المناسبة حول هدفك.",
                 )}
               </p>
             </div>
@@ -390,16 +390,16 @@ export default function Site({
                 </div>
                 <div className="pricing-philosophy">
                   <div>
-                    <p className="eyebrow">{t("PRICING WITH A PURPOSE", "تسعير إله هدف")}</p>
+                    <p className="eyebrow">{t("PRICING WITH A PURPOSE", "تسعير مبني على الهدف")}</p>
                     <h3>{t("We don't sell you what you don't need.", "ما منبيعك شي ما بتحتاجه.")}</h3>
                     <p>
                       {t(
                         "Every engagement starts with an assessment. Your investment is based on the strategy, execution and level of responsibility required to move toward the agreed goal — not the number of services added.",
-                        "كل شغل بيبلّش بـ Assessment. الاستثمار بيتحدد حسب الاستراتيجية، التنفيذ ومستوى المسؤولية المطلوبة للتقدم نحو الهدف المتفق عليه — مش حسب عدد الخدمات.",
+                        "كل تعاون بيبلّش بتقييم. الاستثمار بيتحدّد حسب الاستراتيجية، وحجم التنفيذ، ومستوى المسؤولية المطلوب للوصول للهدف المتفق عليه — مش حسب عدد الخدمات.",
                       )}
                     </p>
                   </div>
-                  <CTA label={t("Get your assessment", "خد الـ Assessment")} />
+                  <CTA label={t("Get your assessment", "اطلب تقييم مشروعك")} />
                 </div>
               </>
             ) : (
@@ -445,7 +445,7 @@ export default function Site({
                   ),
                 ],
                 [
-                  t("Create, launch & refine", "مننفّذ، منطلق ومنحسّن"),
+                  t("Create, launch & refine", "مننفّذ، منطلق الحملات، ومنحسّن"),
                   t(
                     "Put the plan to work and learn from the response.",
                     "منحوّل الخطة لتنفيذ ومنتعلّم من النتائج.",
@@ -528,7 +528,7 @@ export default function Site({
           <X />
         </button>
         <p className="eyebrow">
-          {t("LET’S START WITH YOU", "خلّينا نبلّش فيك")}
+          {t("LET’S START WITH YOU", "خلّينا نبلّش بمشروعك")}
         </p>
         <h2>{t("Tell us a little.", "خبرنا شوي.")}</h2>
         <p>
@@ -569,7 +569,7 @@ export default function Site({
                 maxLength={200}
                 placeholder={t(
                   "e.g. An online clothing store",
-                  "مثلاً متجر ملابس أونلاين",
+                  "مثلاً: متجر ملابس أونلاين",
                 )}
               />
             </label>
