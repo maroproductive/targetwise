@@ -12,7 +12,16 @@ export async function content(admin = false): Promise<Content> {
   const settings = await d.collection("settings").findOne({ key: "site" });
   if (settings) result.settings = settings.data as Settings;
   for (const kind of kinds) {
-    const marker = await d.collection("collections").findOne({ key: kind });
+    let marker = await d.collection("collections").findOne({ key: kind });
+
+    // One-time migration for the new Foundation / Growth / Scale model.
+    // Existing TargetWise databases may already have an empty packages marker,
+    // so seed the default plans once and record the migration version.
+    if (kind === "packages" && (!marker || (marker.version ?? 0) < 2)) {
+      await initialize("packages");
+      marker = await d.collection("collections").findOne({ key: kind });
+    }
+
     if (marker) {
       const docs = await d
         .collection(kind)
@@ -27,13 +36,17 @@ export async function content(admin = false): Promise<Content> {
 export async function initialize(kind: string) {
   const d = await db();
   await d.collection(kind).createIndex({ id: 1 }, { unique: true });
-  if (kind === "services") {
-    for (const item of defaults.services)
+  if (kind === "services" || kind === "packages") {
+    for (const item of defaults[kind])
       await d
         .collection(kind)
         .updateOne({ id: item.id }, { $setOnInsert: item }, { upsert: true });
   }
   await d
     .collection("collections")
-    .updateOne({ key: kind }, { $set: { key: kind } }, { upsert: true });
+    .updateOne(
+      { key: kind },
+      { $set: { key: kind, ...(kind === "packages" ? { version: 2 } : {}) } },
+      { upsert: true },
+    );
 }
