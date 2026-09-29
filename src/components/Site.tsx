@@ -85,10 +85,10 @@ export default function Site({
       <ArrowUpRight size={19} />
     </button>
   );
-  const packageCard = (p: Item) => (
-    <article className="package" key={p.id}>
+  const packageCard = (p: Item, index: number) => (
+    <article className="package growth-plan" key={p.id}>
       <p className="eyebrow">
-        {data.services.find((s) => s.id === p.serviceId)?.title[lang]}
+        {String(index + 1).padStart(2, "0")} — {t("GROWTH STAGE", "مرحلة النمو")}
       </p>
       <h3>{p.title[lang]}</h3>
       <p>{p.description[lang]}</p>
@@ -98,10 +98,18 @@ export default function Site({
           <span>USD</span>
         </div>
       )}
-      <div className="detail-text">{p.details[lang]}</div>
+      {p.details[lang] && (
+        <details className="plan-details">
+          <summary>
+            {t("See what's included", "شوف شو بيتضمن")}
+            <Plus size={16} />
+          </summary>
+          <div className="detail-text">{p.details[lang]}</div>
+        </details>
+      )}
       <CTA
         name={p.title[lang]}
-        label={t("Discuss this package", "ناقش هالباقة")}
+        label={t("Discuss this plan", "ناقش هالخطة")}
       />
     </article>
   );
@@ -125,7 +133,7 @@ export default function Site({
           {[
             ["services", "Services", "الخدمات"],
             ["work", "Work", "الأعمال"],
-            ["packages", "Packages", "الباقات"],
+            ["packages", "Work with us", "اشتغل معنا"],
             ["about", "About", "عنّا"],
           ].map(([id, en, a]) => (
             <a
@@ -363,20 +371,37 @@ export default function Site({
                   03 — {t("WORK WITH US", "اشتغل معنا")}
                 </p>
                 <h2>
-                  {t("The right support.", "الدعم المناسب.")}
+                  {t("Built for where", "مبني حسب المرحلة")}
                   <br />
-                  <em>{t("For your next step.", "لخطوتك الجاية.")}</em>
+                  <em>{t("your business is going.", "اللي مشروعك رايح عليها.")}</em>
                 </h2>
               </div>
               <p>
                 {t(
-                  "Clear scope. A shared goal. Let’s find the service that fits where your business is going.",
-                  "نطاق شغل واضح وهدف مشترك. خلّينا نحدّد الخدمة المناسبة لوجهة مشروعك.",
+                  "Every business is at a different stage. We assess what you actually need, then build the right plan around your goal.",
+                  "كل مشروع بمرحلة مختلفة. منفهم شو فعلياً بحاجة، وبعدها منبني الخطة المناسبة حول هدفك.",
                 )}
               </p>
             </div>
             {packages.length ? (
-              <div className="packages-grid">{packages.map(packageCard)}</div>
+              <>
+                <div className="packages-grid">
+                  {packages.map((p, i) => packageCard(p, i))}
+                </div>
+                <div className="pricing-philosophy">
+                  <div>
+                    <p className="eyebrow">{t("PRICING WITH A PURPOSE", "تسعير إله هدف")}</p>
+                    <h3>{t("We don't sell you what you don't need.", "ما منبيعك شي ما بتحتاجه.")}</h3>
+                    <p>
+                      {t(
+                        "Every engagement starts with an assessment. Your investment is based on the strategy, execution and level of responsibility required to move toward the agreed goal — not the number of services added.",
+                        "كل شغل بيبلّش بـ Assessment. الاستثمار بيتحدد حسب الاستراتيجية، التنفيذ ومستوى المسؤولية المطلوبة للتقدم نحو الهدف المتفق عليه — مش حسب عدد الخدمات.",
+                      )}
+                    </p>
+                  </div>
+                  <CTA label={t("Get your assessment", "خد الـ Assessment")} />
+                </div>
+              </>
             ) : (
               <div className="package-invite">
                 <p>
